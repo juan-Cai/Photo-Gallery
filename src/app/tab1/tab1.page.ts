@@ -31,18 +31,14 @@ export class Tab1Page {
   }
 
   
-  crear(Nombre: string, Glucose: number, BMI: number){
-    let pxy = this.predictProbability(Glucose, BMI);
-    let res = this.scaling(pxy);
-    addDoc(collection(this.firestore, "test"), {Nombre: Nombre, Glucose: Glucose, BMI: BMI, Probabilidad: pxy, Resultado: res});
+  crear(Titulo: string, Autor: string){
+    addDoc(collection(this.firestore, "test"), {Titulo: Titulo,Autor: Autor});
     console.log(this.test$);
   }
 
-  update(Nombre: string, Glucose: number, BMI: number, uid: any){
-    let pxy = this.predictProbability(Glucose, BMI);
-    let res = this.scaling(pxy);
+  update(Titulo: string, Autor: string, uid: any){
     let refDoc = doc(this.firestore, "test", uid);
-    updateDoc(refDoc, {Nombre: Nombre, Glucose: Glucose, BMI: BMI, Probabilidad: pxy, Resultado: res});
+    updateDoc(refDoc, {Titulo: Titulo, Autor: Autor});
   }
 
   delete(uid: any){
@@ -52,35 +48,28 @@ export class Tab1Page {
 
   async showCreateAlert(){
     let alert = await this.alertController.create({
-      header: "Agregar paciente",
+      header: "Agregar Libro",
       inputs: [
         {
-          name: "Nombre",
-          placeholder: "ingrese el nombre",
+          name: "Titulo",
+          placeholder: "ingrese un titulo",
           type: "text"
         },
         {
-          id: "Glucosa",
-          name: "Glucosa",
-          placeholder: "Ingrese Glucosa",
-          type: "number"
-        },
-        {
-          id: "BMI",
-          name: "BMI",
-          placeholder: "indice de masa corporal",
-          type: "number"
+          id: "Autor",
+          name: "Autor",
+          placeholder: "ingrese el autor",
+          type: "text"
         }
       ],
       buttons: [
         {
           text: "Agregar",
           handler: data => {
-            let nombre = data.Nombre;
-            let glucose = data.Glucosa;
-            let BMI = data.BMI;
+            let titulo = data.Titulo;
+            let autor = data.Autor;
 
-            this.crear(nombre,glucose,BMI);
+            this.crear(titulo,autor);
           }
         }
       ]
@@ -89,40 +78,32 @@ export class Tab1Page {
   }
 
 
- 
+
 
   async showUpdateAlert(info: any){
     let alert = await this.alertController.create({
-      header: "Editar informacion",
+      header: "Editar Libro",
       inputs: [
         {
-          name: "Nombre",
-          placeholder: info.Nombre,
-          value: info.Nombre,
+          name: "Titulo",
+          placeholder: info.Titulo,
+          value: info.Titulo,
           type: 'text'
         },
         {
-          name: "Glucosa",
-          placeholder: info.Glucose,
-          type: "number",
-          value: info.Glucose
-        },
-        {
-          name: "BMI",
-          placeholder: info.BMI,
-          type: "number",
-          value: info.BMI
+          name: "Autor",
+          placeholder: info.Autor,
+          type: "text",
+          value: info.Autor
         }
       ],
       buttons: [
         {
           text: "editar",
           handler: data => {
-            let nombre = data.Nombre;
-            let glucose = data.Glucosa;
-            let bmi = data.BMI;
-
-            this.update(nombre,glucose,bmi,info.uid);
+            let titulo = data.Titulo;
+            let autor = data.Autor;
+            this.update(titulo,autor,info.uid);
           }
         }
       ]
@@ -138,41 +119,14 @@ export class Tab1Page {
   }
 
   setNameShared(){
-    this.photoService.nextNombre("i am");
+    this.photoService.nextNombre("Ingresa tu nombre en Tab 2");
   }
-
-
-  predictProbability(Glucose: number, BMI: number){
-    let sum = this.b0+(this.b1*Glucose)+(this.b2*BMI);
-    let pxy = (this.e**sum)/(1+(this.e**sum));
-    return pxy
-  }
-
-  scaling(pxy: number){
-    if(pxy > this.cuttOff){
-      return "Tiene diabetes"
-    }
-    return "No tiene diabetes"
-  }
-
-  async showPredictAlert(data: Test){
-    let alert = await this.alertController.create({
-      header: "Prediccion",
-      message: "Este paciente tiene " + data.Resultado + " con una probabilidad de " + data.Probabilidad
-    })
-    await alert.present();    
-  }
-
-
 
 }
 
 
 export interface Test {
-  Nombre: String,
-  Glucose: number,
-  BMI: number,
-  Probabilidad: number,
-  Resultado: String,
+  Titulo: String,
+  Autor: String,
   uid: String
 }

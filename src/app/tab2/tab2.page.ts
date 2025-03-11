@@ -21,7 +21,7 @@ export class Tab2Page {
   alertInputs = [
     {
       name: "Nombre",
-      placeholder: "ingrese el nombre nuevo"
+      placeholder: "Ingresa tu nombre"
     }
   ]
   constructor(public photoService: PhotoService,

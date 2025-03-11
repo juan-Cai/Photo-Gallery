@@ -16,7 +16,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   // or after 30 seconds (whichever comes first).
   registrationStrategy: 'registerWhenStable:30000'
 })],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({ projectId: "pwa01-fa3ab", appId: "1:453895253447:web:761ee89599e66ecb6e3de2", storageBucket: "pwa01-fa3ab.firebasestorage.app", apiKey: "AIzaSyCef0n62pEqzVs3K3yLIoGtS2JWnqv_QcI", authDomain: "pwa01-fa3ab.firebaseapp.com", messagingSenderId: "453895253447" })), provideFirestore(() => getFirestore())],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({ projectId: "galeria-6dbea", appId: "1:528628894235:web:b680f7dff3ae04139846be", storageBucket: "galeria-6dbea.firebasestorage.app", apiKey: "AIzaSyAZoUrWSDya231_UAxbAZdlZZgpvJGopNA", authDomain: "galeria-6dbea.firebaseapp.com", messagingSenderId: "G-WDWMKH84J5" })), provideFirestore(() => getFirestore())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
