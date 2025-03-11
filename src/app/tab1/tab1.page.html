@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Nombre de usuario:  {{ nombreUser }}
+      
+    </ion-title>
+    <ion-avatar slot="end">
+      <img alt="" [src]="photo[0].webviewPath" />
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" >
+    <ion-fab-button id="create" (click)="showCreateAlert()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+<ion-list>
+  <ion-item-sliding *ngFor="let test of test$ | async">
+    <ion-item [button]="true" (click)="showPredictAlert(test)">
+      {{test.Nombre}}
+    </ion-item>
+    <ion-item-options>
+      <ion-item-option (click)="showUpdateAlert(test)">
+        Actualizar
+      </ion-item-option>
+      <ion-item-option (click)="delete(test.uid)">
+        Eliminar
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+
+  
+</ion-content>
