@@ -2,3 +2,7 @@
 .angular/cache/
 node_modules
 .angular
+.firebase
+.vscode
+android
+public
